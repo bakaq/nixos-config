@@ -1,0 +1,48 @@
+{
+  "nodes": {
+    "musnix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729534638,
+        "narHash": "sha256-hsiKQjrbUQuKewNSV4REcQ56rANrVywUFdA15W60Rvg=",
+        "owner": "musnix",
+        "repo": "musnix",
+        "rev": "d6f155afb13711faca548a9047e88e1e37b9766c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "musnix",
+        "repo": "musnix",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1729665710,
+        "narHash": "sha256-AlcmCXJZPIlO5dmFzV3V2XF6x/OpNWUV8Y/FMPGd8Z4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2768c7d042a37de65bb1b5b3268fc987e534c49d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "musnix": "musnix",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
