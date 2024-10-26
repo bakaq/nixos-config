@@ -7,6 +7,7 @@
       ./hardware-configuration.nix
   ];
 
+  # === Packages === 
   environment.systemPackages = with pkgs; let
     wine = wineWowPackages.stable;
   in [
@@ -77,25 +78,17 @@
     orca at-spi2-atk
   ];
 
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
+  # === Nix and Nixpkgs settings === 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
     # For gamescope
     # See: https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1229444338
     steam = pkgs.steam.override {
       extraPkgs = pkgs: with pkgs; [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
+        xorg.libXcursor xorg.libXi xorg.libXinerama xorg.libXScrnSaver
+        libpng libpulseaudio libvorbis
+        libkrb5 keyutils
         stdenv.cc.cc.lib
-        libkrb5
-        keyutils
       ];
     };
     # Sixel support in mpv
@@ -115,6 +108,7 @@
     };
   };
 
+  # === Graphics ===
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -143,15 +137,13 @@
       Experimental = true;
     };
   };
-  programs.adb.enable = true;
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 12*1024; # 12GiB
-  }];
-
+  # === Boot and kernel ===
+  boot.supportedFilesystems = [ "ntfs" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
 
+  # === Networking ===
   networking.hostName = "kbook";
 
   networking.networkmanager.enable = true;
@@ -162,6 +154,14 @@
     allowedTCPPorts = [ 8000 5000 3000 ];
   };
 
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      conf-dir = "/etc/dnsmasq-conf.d";
+    };
+  };
+
+  # === Locale and keyboard ===
   time.timeZone = "America/Sao_Paulo";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -212,13 +212,13 @@
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # === Users and groups ===
   users.users.kaue = {
     isNormalUser = true;
-    #shell = pkgs.nushell;
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "adbusers" "dialout" "podman" ];
   };
 
+  # === Authentication ===
   security.polkit.enable = true;
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -240,7 +240,7 @@
     };
   };
 
-  # Enable sound.
+  # === Audio ===
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -252,85 +252,43 @@
   };
   musnix.enable = true;
 
+  # === Documentation ===
   documentation.dev.enable = true;
   documentation.man = {
     enable = true;
     generateCaches = true;
   };
 
+  # === Dynamic linking and nix-ld ===
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    alsa-lib
-    at-spi2-atk
-    at-spi2-core
-    atk
-    cairo
-    cups
-    curl
-    dbus
-    expat
-    fontconfig
-    freetype
-    fuse3
-    gdk-pixbuf
-    glib
-    gtk3
-    glibc
-    icu
-    libGL
-    libappindicator-gtk3
-    libdrm
-    libglvnd
-    libnotify
-    libpulseaudio
-    libunwind
-    libusb1
-    libuuid
-    libxkbcommon
-    libxml2
-    mesa
-    nspr
-    nss
-    openssl
-    pango
-    pipewire
-    readline
-    stdenv.cc.cc
-    systemd
-    vulkan-loader
-    xorg.libX11
-    xorg.libXScrnSaver
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXtst
-    xorg.libxcb
-    xorg.libxkbfile
-    xorg.libxshmfence
-    zlib
-    blas
-    lapack
-    config.boot.kernelPackages.nvidia_x11
+    alsa-lib pipewire
+    at-spi2-atk at-spi2-core atk
+    cairo pango cups fontconfig freetype
+    curl zlib openssl readline
+    expat fuse3
+    gdk-pixbuf glib gtk3
+    systemd glibc dbus stdenv.cc.cc
+    libGL libappindicator-gtk3 libdrm libglvnd libnotify libpulseaudio libunwind
+    libusb1 libuuid libxkbcommon libxml2
+    nspr nss icu
+    xorg.libX11 xorg.libXScrnSaver xorg.libXcomposite xorg.libXcursor xorg.libXdamage
+    xorg.libXext xorg.libXfixes xorg.libXi xorg.libXrandr xorg.libXrender xorg.libXtst
+    xorg.libxcb xorg.libxkbfile xorg.libxshmfence
+    blas lapack
+    vulkan-loader mesa config.boot.kernelPackages.nvidia_x11
   ];
 
+  # === Fonts ===
   fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    nerdfonts
-    corefonts
-    liberation_ttf
-    unifont
-    unifont_upper
+    noto-fonts noto-fonts-cjk-sans noto-fonts-emoji
+    nerdfonts corefonts liberation_ttf
+    unifont unifont_upper
     wqy_zenhei
   ];
   fonts.fontDir.enable = true;
 
+  # === Window management and Wayland ===
   programs.sway = {
     enable = true;
     extraOptions = ["--unsupported-gpu"];
@@ -345,26 +303,22 @@
     ];
   };
   programs.xwayland.enable = true;
-  programs.light.enable = true;
 
+  # === XDG Portals ===
   xdg.portal.enable = true;
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   xdg.portal.wlr.enable = true;
 
+  # === Gaming ===
   programs.steam.enable = true;
   programs.gamescope.enable = true;
 
   programs.direnv.enable = true;
 
+  # === Flatpak ===
   services.flatpak.enable = true;
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      conf-dir = "/etc/dnsmasq-conf.d";
-    };
-  };
-
+  # === Environment ===
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
     VISUAL = "nvim";
@@ -386,7 +340,10 @@
     enable = true;
     binfmt = true;
   };
+  programs.light.enable = true;
+  programs.adb.enable = true;
 
+  # === Containers ===
   hardware.nvidia-container-toolkit.enable = true;
   virtualisation = {
     containers.enable = true;
@@ -397,6 +354,12 @@
       defaultNetwork.settings.dns_enabled = true;
     };
   };
+
+  # === Swap ===
+  swapDevices = [{
+    device = "/swapfile";
+    size = 12*1024; # 12GiB
+  }];
 
   system.stateVersion = "23.11";
 }
