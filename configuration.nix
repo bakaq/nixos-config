@@ -7,76 +7,98 @@
       ./hardware-configuration.nix
   ];
 
-  # === Packages === 
+  # === Packages and programs === 
   environment.systemPackages = with pkgs; let
     wine = wineWowPackages.stable;
-  in [
-    cachix
-    cowsay cmatrix
-    polkit_gnome
-    firefox chromium mpv qbittorrent krita zathura
-    antimicrox
-    gparted
-    appimage-run
-    xdragon
-    feh imagemagick
-    libsForQt5.dolphin
-    libsForQt5.qt5ct
-    qt5.qtwayland
-    adwaita-qt
-    adwaita-qt6
-    gnome-themes-extra
-    adwaita-icon-theme
-    glib
-    vulkan-tools
-    wine winetricks
-    tmux neovim newsboat jq unzip
-    btop duf du-dust lshw fzf ripgrep fd
-    gcc clang-tools
-    gradle gnumake
-    go swi-prolog clojure
-    # julia-bin is not in the cache yet for some reason
-    #julia-bin
-    julia
-    rustup pixi 
-    (python312.withPackages (ps: with ps; [
-      numpy matplotlib scipy sympy pandas
-      requests beautifulsoup4 lxml
-      flask
-      pytest hypothesis
-    ]))
-    git
-    nushell carapace fish
-    nixd lua-language-server gopls jdt-language-server clojure-lsp
-    nodePackages.bash-language-server nodePackages.typescript-language-server
-    pyright black
-    pavucontrol qpwgraph
-    (yabridge.override { inherit wine; }) (yabridgectl.override { inherit wine; })
-    reaper carla guitarix gxplugins-lv2
-    # https://github.com/NixOS/nixpkgs/issues/348871
-    #distrho
-    musescore
-    neofetch cmatrix
-    desmume mgba pcsx2
-    (retroarch.override { cores = with libretro; [
-      mupen64plus
-    ];})
-    glxinfo
-    man-pages man-pages-posix tldr
-    p7zip unrar-wrapper
-    tlaplusToolbox coq coqPackages.coqide
-    nusmv
-    tigervnc
-    thunderbird signal-desktop
-    file-roller
-    libsixel libnotify
-    datefudge trealla
-    tio arduino-ide hexedit
-    texliveFull
-    file gdb
-    netcat-openbsd nmap dig
-    orca at-spi2-atk
+  in 
+    [
+      # Desktop
+      polkit_gnome
+      libnotify glib
+      firefox chromium
+      mpv qbittorrent 
+      zathura thunderbird
+      feh imagemagick krita 
+      file-roller libsForQt5.dolphin
+    ] ++ [
+      # Programming languages
+      gcc rustup go
+      swi-prolog trealla
+      clojure julia
+      (python312.withPackages (ps: with ps; [
+        numpy matplotlib scipy sympy pandas
+        requests beautifulsoup4 lxml
+        flask
+        pytest hypothesis
+      ]))
+    ] ++ [
+      # Programming tools, linters and LSPs
+      pixi gradle gnumake
+      clang-tools gdb
+      nixd lua-language-server gopls jdt-language-server clojure-lsp
+      nodePackages.bash-language-server nodePackages.typescript-language-server
+      pyright black
+    ] ++ [
+      # Audio and music
+      pavucontrol qpwgraph
+      (yabridge.override { inherit wine; }) (yabridgectl.override { inherit wine; })
+      reaper carla guitarix gxplugins-lv2
+      # https://github.com/NixOS/nixpkgs/issues/348871
+      #distrho
+      musescore
+    ] ++ [
+      # CLI
+      cowsay cmatrix neofetch
+      xdragon
+      tmux neovim newsboat jq unzip
+      btop duf du-dust lshw fzf ripgrep fd
+      git
+      nushell carapace fish
+      p7zip unrar-wrapper
+      libsixel
+      file
+    ] ++ [
+      # Emulation
+      desmume mgba pcsx2
+      (retroarch.override {
+        cores = with libretro; [
+          mupen64plus
+        ];
+      })
+    ] ++ [
+      # Graphics and Wayland
+      qt5.qtwayland
+      vulkan-tools glxinfo
+    ] ++ [
+      # Formal methods
+      tlaplusToolbox
+      coq coqPackages.coqide
+      nusmv
+    ] ++ [
+      # Themes
+      gnome-themes-extra adwaita-icon-theme
+      adwaita-qt adwaita-qt6 libsForQt5.qt5ct
+    ] ++ [ netcat-openbsd nmap dig ] # Networking
+      ++ [ orca at-spi2-atk ] # Acessibility
+      ++ [ wine winetricks ] # Wine and gaming
+      ++ [ man-pages man-pages-posix tldr ] # Documentation
+      ++ [ tio arduino-ide hexedit ] # Embedded
+    ++ [
+      # Misc
+      cachix
+      antimicrox
+      gparted
+      datefudge
+      texliveFull
+      tigervnc
   ];
+
+  programs.java = {
+    enable = true;
+    binfmt = true;
+  };
+  programs.light.enable = true;
+  programs.adb.enable = true;
 
   # === Nix and Nixpkgs settings === 
   nixpkgs.config.allowUnfree = true;
@@ -313,11 +335,6 @@
   programs.steam.enable = true;
   programs.gamescope.enable = true;
 
-  programs.direnv.enable = true;
-
-  # === Flatpak ===
-  services.flatpak.enable = true;
-
   # === Environment ===
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
@@ -336,12 +353,14 @@
     };
   };
 
-  programs.java = {
+  programs.appimage = {
     enable = true;
     binfmt = true;
   };
-  programs.light.enable = true;
-  programs.adb.enable = true;
+
+  services.flatpak.enable = true;
+
+  programs.direnv.enable = true;
 
   # === Containers ===
   hardware.nvidia-container-toolkit.enable = true;
