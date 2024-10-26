@@ -1,88 +1,175 @@
 {
   config,
   pkgs,
-  ... 
-}: {
+  ...
+}:
+{
   imports = [
-      ./hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   # === Packages and programs === 
-  environment.systemPackages = with pkgs; let
-    wine = wineWowPackages.stable;
-  in 
+  environment.systemPackages =
+    with pkgs;
+    let
+      wine = wineWowPackages.stable;
+    in
     [
       # Desktop
       polkit_gnome
-      libnotify glib
-      firefox chromium
-      mpv qbittorrent 
-      zathura thunderbird
-      feh imagemagick krita 
-      file-roller libsForQt5.dolphin
-    ] ++ [
+      libnotify
+      glib
+      firefox
+      chromium
+      mpv
+      qbittorrent
+      zathura
+      thunderbird
+      feh
+      imagemagick
+      krita
+      file-roller
+      libsForQt5.dolphin
+    ]
+    ++ [
       # Programming languages
-      gcc rustup go
-      swi-prolog trealla
-      clojure julia
-      (python312.withPackages (ps: with ps; [
-        numpy matplotlib scipy sympy pandas
-        requests beautifulsoup4 lxml
-        flask
-        pytest hypothesis
-      ]))
-    ] ++ [
+      gcc
+      rustup
+      go
+      swi-prolog
+      trealla
+      clojure
+      julia
+      (python312.withPackages (
+        ps: with ps; [
+          numpy
+          matplotlib
+          scipy
+          sympy
+          pandas
+          requests
+          beautifulsoup4
+          lxml
+          flask
+          pytest
+          hypothesis
+        ]
+      ))
+    ]
+    ++ [
       # Programming tools, linters and LSPs
-      pixi gradle gnumake
-      clang-tools gdb
-      nixd lua-language-server gopls jdt-language-server clojure-lsp
-      nodePackages.bash-language-server nodePackages.typescript-language-server
-      pyright black
-    ] ++ [
+      pixi
+      gradle
+      gnumake
+      clang-tools
+      gdb
+      nixd
+      nixfmt-rfc-style
+      lua-language-server
+      gopls
+      jdt-language-server
+      clojure-lsp
+      nodePackages.bash-language-server
+      nodePackages.typescript-language-server
+      pyright
+      black
+    ]
+    ++ [
       # Audio and music
-      pavucontrol qpwgraph
-      (yabridge.override { inherit wine; }) (yabridgectl.override { inherit wine; })
-      reaper carla guitarix gxplugins-lv2
+      pavucontrol
+      qpwgraph
+      (yabridge.override { inherit wine; })
+      (yabridgectl.override { inherit wine; })
+      reaper
+      carla
+      guitarix
+      gxplugins-lv2
       # https://github.com/NixOS/nixpkgs/issues/348871
       #distrho
       musescore
-    ] ++ [
+    ]
+    ++ [
       # CLI
-      cowsay cmatrix neofetch
+      cowsay
+      cmatrix
+      neofetch
       xdragon
-      tmux neovim newsboat jq unzip
-      btop duf du-dust lshw fzf ripgrep fd
+      tmux
+      neovim
+      newsboat
+      jq
+      unzip
+      btop
+      duf
+      du-dust
+      lshw
+      fzf
+      ripgrep
+      fd
       git
-      nushell carapace fish
-      p7zip unrar-wrapper
+      nushell
+      carapace
+      fish
+      p7zip
+      unrar-wrapper
       libsixel
       file
-    ] ++ [
+    ]
+    ++ [
       # Emulation
-      desmume mgba pcsx2
+      desmume
+      mgba
+      pcsx2
       (retroarch.override {
         cores = with libretro; [
           mupen64plus
         ];
       })
-    ] ++ [
+    ]
+    ++ [
       # Graphics and Wayland
       qt5.qtwayland
-      vulkan-tools glxinfo
-    ] ++ [
+      vulkan-tools
+      glxinfo
+    ]
+    ++ [
       # Formal methods
       tlaplusToolbox
-      coq coqPackages.coqide
+      coq
+      coqPackages.coqide
       nusmv
-    ] ++ [
+    ]
+    ++ [
       # Themes
-      gnome-themes-extra adwaita-icon-theme
-      adwaita-qt adwaita-qt6 libsForQt5.qt5ct
-    ] ++ [ netcat-openbsd nmap dig ] # Networking
-      ++ [ orca at-spi2-atk ] # Acessibility
-      ++ [ wine winetricks ] # Wine and gaming
-      ++ [ man-pages man-pages-posix tldr ] # Documentation
-      ++ [ tio arduino-ide hexedit ] # Embedded
+      gnome-themes-extra
+      adwaita-icon-theme
+      adwaita-qt
+      adwaita-qt6
+      libsForQt5.qt5ct
+    ]
+    ++ [
+      netcat-openbsd
+      nmap
+      dig
+    ] # Networking
+    ++ [
+      orca
+      at-spi2-atk
+    ] # Acessibility
+    ++ [
+      wine
+      winetricks
+    ] # Wine and gaming
+    ++ [
+      man-pages
+      man-pages-posix
+      tldr
+    ] # Documentation
+    ++ [
+      tio
+      arduino-ide
+      hexedit
+    ] # Embedded
     ++ [
       # Misc
       cachix
@@ -91,7 +178,7 @@
       datefudge
       texliveFull
       tigervnc
-  ];
+    ];
 
   programs.java = {
     enable = true;
@@ -106,12 +193,19 @@
     # For gamescope
     # See: https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1229444338
     steam = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        xorg.libXcursor xorg.libXi xorg.libXinerama xorg.libXScrnSaver
-        libpng libpulseaudio libvorbis
-        libkrb5 keyutils
-        stdenv.cc.cc.lib
-      ];
+      extraPkgs =
+        pkgs: with pkgs; [
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          libkrb5
+          keyutils
+          stdenv.cc.cc.lib
+        ];
     };
     # Sixel support in mpv
     mpv-unwrapped = pkgs.mpv-unwrapped.override {
@@ -121,7 +215,10 @@
 
   nix.settings = {
     auto-optimise-store = true;
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
   nix.registry = {
     nixpkgs.to = {
@@ -131,7 +228,7 @@
   };
 
   # === Graphics ===
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -173,7 +270,11 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8000 5000 3000 ];
+    allowedTCPPorts = [
+      8000
+      5000
+      3000
+    ];
   };
 
   services.dnsmasq = {
@@ -202,7 +303,7 @@
   services.xserver.xkb.extraLayouts = {
     dvpk = {
       description = "Customized Programmer's Dvorak";
-      languages = ["eng"];
+      languages = [ "eng" ];
       symbolsFile = builtins.toFile "dvpk" ''
         xkb_symbols "dvpk" {
           include "us(dvp)"
@@ -218,7 +319,7 @@
     };
     br-abnt2k = {
       description = "Customized br-abnt2";
-      languages = ["por"];
+      languages = [ "por" ];
       symbolsFile = builtins.toFile "abnt2k" ''
         xkb_symbols "abnt2k" {
           include "br(abnt2)"
@@ -237,7 +338,15 @@
   # === Users and groups ===
   users.users.kaue = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "adbusers" "dialout" "podman" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "audio"
+      "adbusers"
+      "dialout"
+      "podman"
+    ];
   };
 
   # === Authentication ===
@@ -284,28 +393,74 @@
   # === Dynamic linking and nix-ld ===
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    alsa-lib pipewire
-    at-spi2-atk at-spi2-core atk
-    cairo pango cups fontconfig freetype
-    curl zlib openssl readline
-    expat fuse3
-    gdk-pixbuf glib gtk3
-    systemd glibc dbus stdenv.cc.cc
-    libGL libappindicator-gtk3 libdrm libglvnd libnotify libpulseaudio libunwind
-    libusb1 libuuid libxkbcommon libxml2
-    nspr nss icu
-    xorg.libX11 xorg.libXScrnSaver xorg.libXcomposite xorg.libXcursor xorg.libXdamage
-    xorg.libXext xorg.libXfixes xorg.libXi xorg.libXrandr xorg.libXrender xorg.libXtst
-    xorg.libxcb xorg.libxkbfile xorg.libxshmfence
-    blas lapack
-    vulkan-loader mesa config.boot.kernelPackages.nvidia_x11
+    alsa-lib
+    pipewire
+    at-spi2-atk
+    at-spi2-core
+    atk
+    cairo
+    pango
+    cups
+    fontconfig
+    freetype
+    curl
+    zlib
+    openssl
+    readline
+    expat
+    fuse3
+    gdk-pixbuf
+    glib
+    gtk3
+    systemd
+    glibc
+    dbus
+    stdenv.cc.cc
+    libGL
+    libappindicator-gtk3
+    libdrm
+    libglvnd
+    libnotify
+    libpulseaudio
+    libunwind
+    libusb1
+    libuuid
+    libxkbcommon
+    libxml2
+    nspr
+    nss
+    icu
+    xorg.libX11
+    xorg.libXScrnSaver
+    xorg.libXcomposite
+    xorg.libXcursor
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXi
+    xorg.libXrandr
+    xorg.libXrender
+    xorg.libXtst
+    xorg.libxcb
+    xorg.libxkbfile
+    xorg.libxshmfence
+    blas
+    lapack
+    vulkan-loader
+    mesa
+    config.boot.kernelPackages.nvidia_x11
   ];
 
   # === Fonts ===
   fonts.packages = with pkgs; [
-    noto-fonts noto-fonts-cjk-sans noto-fonts-emoji
-    nerdfonts corefonts liberation_ttf
-    unifont unifont_upper
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    nerdfonts
+    corefonts
+    liberation_ttf
+    unifont
+    unifont_upper
     wqy_zenhei
   ];
   fonts.fontDir.enable = true;
@@ -313,15 +468,19 @@
   # === Window management and Wayland ===
   programs.sway = {
     enable = true;
-    extraOptions = ["--unsupported-gpu"];
+    extraOptions = [ "--unsupported-gpu" ];
     extraSessionCommands = ''
       export QT_QPA_PLATFORM=wayland-egl
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
     extraPackages = with pkgs; [
-      foot bemenu dunst sway-contrib.grimshot
-      wlsunset waybar
+      foot
+      bemenu
+      dunst
+      sway-contrib.grimshot
+      wlsunset
+      waybar
     ];
   };
   programs.xwayland.enable = true;
@@ -375,10 +534,12 @@
   };
 
   # === Swap ===
-  swapDevices = [{
-    device = "/swapfile";
-    size = 12*1024; # 12GiB
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 12 * 1024; # 12GiB
+    }
+  ];
 
   system.stateVersion = "23.11";
 }
