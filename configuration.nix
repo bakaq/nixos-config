@@ -114,6 +114,9 @@
       unrar-wrapper
       libsixel
       file
+      btrfs-progs
+      pciutils
+      lsof
     ]
     ++ [
       # Emulation
