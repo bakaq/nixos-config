@@ -18,11 +18,6 @@
       fsType = "ext4";
     };
 
-  fileSystems."/fast-storage" =
-    { device = "/dev/disk/by-uuid/70f82cdf-e51e-4c43-91c4-37f4838771bc";
-      fsType = "ext4";
-    };
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/07E0-C852";
       fsType = "vfat";
@@ -31,6 +26,11 @@
 
   fileSystems."/slow-storage" =
     { device = "/dev/disk/by-uuid/3dbd091f-801a-4ad8-ad45-da2c17a08a51";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/fast-storage" =
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
       fsType = "btrfs";
     };
 

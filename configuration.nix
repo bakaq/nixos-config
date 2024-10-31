@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -224,11 +225,9 @@
     ];
   };
   nix.registry = {
-    nixpkgs.to = {
-      type = "path";
-      path = pkgs.path;
-    };
+    nixpkgs.flake = inputs.nixpkgs;
   };
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}"];
 
   # === Graphics ===
   services.xserver.videoDrivers = [ "nvidia" ];
