@@ -14,8 +14,31 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/13caf491-02a9-4799-b2e1-7ccd73434f46";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
+      fsType = "btrfs";
+      options = [ "subvol=local/nix" ];
+    };
+
+  fileSystems."/fast-storage" =
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
+      fsType = "btrfs";
+      options = [ "subvol=safe/home" ];
+    };
+
+  fileSystems."/slow-storage" =
+    { device = "/dev/disk/by-uuid/3dbd091f-801a-4ad8-ad45-da2c17a08a51";
+      fsType = "btrfs";
     };
 
   fileSystems."/boot" =
@@ -24,20 +47,10 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/fast-storage" =
+  fileSystems."/swap" =
     { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
       fsType = "btrfs";
-    };
-
-  fileSystems."/slow-storage" =
-    { device = "/dev/disk/by-uuid/3dbd091f-801a-4ad8-ad45-da2c17a08a51";
-      fsType = "btrfs";
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=local/swap" ];
     };
 
   swapDevices = [ ];

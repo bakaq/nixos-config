@@ -264,6 +264,12 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
 
+  # === Filesystems ===
+  fileSystems = {
+    "/nix".options = [ "noatime" ];
+    "/swap".options = [ "noatime" ];
+  };
+
   # === Networking ===
   networking.hostName = "kbook";
 
@@ -539,8 +545,8 @@
   zramSwap.enable = true;
   swapDevices = [
     {
-      device = "/swapfile";
-      size = 12 * 1024; # 12GiB
+      device = "/swap/swapfile";
+      size = 8 * 1024; # 8GiB
     }
   ];
 
