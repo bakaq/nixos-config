@@ -25,20 +25,16 @@
       options = [ "subvol=local/nix" ];
     };
 
-  fileSystems."/fast-storage" =
-    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
-      fsType = "btrfs";
-    };
-
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
       fsType = "btrfs";
       options = [ "subvol=safe/home" ];
     };
 
-  fileSystems."/slow-storage" =
-    { device = "/dev/disk/by-uuid/3dbd091f-801a-4ad8-ad45-da2c17a08a51";
+  fileSystems."/swap" =
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
       fsType = "btrfs";
+      options = [ "subvol=local/swap" ];
     };
 
   fileSystems."/boot" =
@@ -47,10 +43,21 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/swap" =
+  fileSystems."/slow-storage" =
+    { device = "/dev/disk/by-uuid/3dbd091f-801a-4ad8-ad45-da2c17a08a51";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/home/kaue/games" =
     { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
       fsType = "btrfs";
-      options = [ "subvol=local/swap" ];
+      options = [ "subvol=local/games" ];
+    };
+
+  fileSystems."/fast-storage" =
+    { device = "/dev/disk/by-uuid/8ac8fe1e-7876-457d-a39d-3436a540de3a";
+      fsType = "btrfs";
+      options = [ "subvol=safe/fast-storage" ];
     };
 
   swapDevices = [ ];
