@@ -13,7 +13,6 @@
   environment.systemPackages =
     with pkgs;
     let
-      wine = wineWowPackages.stable;
     in
     [
       # Desktop
@@ -79,8 +78,8 @@
       # Audio and music
       pavucontrol
       qpwgraph
-      (yabridge.override { inherit wine; })
-      (yabridgectl.override { inherit wine; })
+      yabridge
+      yabridgectl
       reaper
       carla
       guitarix
@@ -176,6 +175,7 @@
     ] # Embedded
     ++ [
       # Misc
+      wineWowPackages.stable
       cachix
       antimicrox
       gparted
