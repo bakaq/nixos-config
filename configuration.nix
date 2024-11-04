@@ -30,6 +30,7 @@
       krita
       file-roller
       libsForQt5.dolphin
+      signal-desktop
     ]
     ++ [
       # Programming languages
@@ -117,6 +118,8 @@
       btrfs-progs
       pciutils
       lsof
+      compsize
+      mount-zip
     ]
     ++ [
       # Emulation
@@ -178,6 +181,8 @@
       datefudge
       texliveFull
       tigervnc
+      wev
+      keyd
     ];
 
   programs.java = {
@@ -304,39 +309,65 @@
       fcitx5-gtk
     ];
   };
-  services.xserver.xkb.extraLayouts = {
-    dvpk = {
-      description = "Customized Programmer's Dvorak";
-      languages = [ "eng" ];
-      symbolsFile = builtins.toFile "dvpk" ''
-        xkb_symbols "dvpk" {
-          include "us(dvp)"
-          key <SCLK> { [ Multi_key ] };
-          key <LSGT> { [ Multi_key ] };
-          key <BKSP> { [ VoidSymbol ] };
-          key <CAPS> { [ Escape ] };
-          key <RALT> { 
-              type = "TWO_LEVEL",
-              symbols = [ BackSpace, BackSpace ]
+  #services.xserver.xkb.extraLayouts = {
+  #  dvpk = {
+  #    description = "Customized Programmer's Dvorak";
+  #    languages = [ "eng" ];
+  #    symbolsFile = builtins.toFile "dvpk" ''
+  #      xkb_symbols "dvpk" {
+  #        include "us(dvp)"
+  #        key <SCLK> { [ Multi_key ] };
+  #        key <LSGT> { [ Multi_key ] };
+  #        key <BKSP> { [ VoidSymbol ] };
+  #        key <CAPS> { [ Escape ] };
+  #        key <RALT> { 
+  #            type = "TWO_LEVEL",
+  #            symbols = [ BackSpace, BackSpace ]
+  #        };
+  #      };
+  #    '';
+  #  };
+  #  br-abnt2k = {
+  #    description = "Customized br-abnt2";
+  #    languages = [ "por" ];
+  #    symbolsFile = builtins.toFile "abnt2k" ''
+  #      xkb_symbols "abnt2k" {
+  #        include "br(abnt2)"
+  #        key <SCLK> { [ Multi_key ] };
+  #        key <BKSP> { [ VoidSymbol ] };
+  #        key <CAPS> { [ Escape ] };
+  #        key <RALT> { 
+  #            type = "TWO_LEVEL",
+  #            symbols = [BackSpace, BackSpace]
+  #        };
+  #      };
+  #    '';
+  #  };
+  #};
+
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(caps_layer, esc)";
+            rightalt = "backspace";
+            backspace = "noop";
+            "102nd" = "compose";
+          };
+          "caps_layer:C" = {
+            tab = "swap(caps_tab_layer)";
+          };
+          caps_tab_layer = {
+            h = "left";
+            j = "down";
+            k = "up";
+            l = "right";
           };
         };
-      '';
-    };
-    br-abnt2k = {
-      description = "Customized br-abnt2";
-      languages = [ "por" ];
-      symbolsFile = builtins.toFile "abnt2k" ''
-        xkb_symbols "abnt2k" {
-          include "br(abnt2)"
-          key <SCLK> { [ Multi_key ] };
-          key <BKSP> { [ VoidSymbol ] };
-          key <CAPS> { [ Escape ] };
-          key <RALT> { 
-              type = "TWO_LEVEL",
-              symbols = [BackSpace, BackSpace]
-          };
-        };
-      '';
+      };
     };
   };
 
