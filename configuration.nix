@@ -312,6 +312,7 @@
         xkb_symbols "dvpk" {
           include "us(dvp)"
           key <SCLK> { [ Multi_key ] };
+          key <LSGT> { [ Multi_key ] };
           key <BKSP> { [ VoidSymbol ] };
           key <CAPS> { [ Escape ] };
           key <RALT> { 
