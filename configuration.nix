@@ -350,6 +350,7 @@
       "adbusers"
       "dialout"
       "podman"
+      "libvirtd"
     ];
   };
 
@@ -540,6 +541,10 @@
       defaultNetwork.settings.dns_enabled = true;
     };
   };
+
+  # === Virtualization ===
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # === Swap ===
   zramSwap.enable = true;
