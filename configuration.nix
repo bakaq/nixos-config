@@ -156,10 +156,6 @@
       dig
     ] # Networking
     ++ [
-      orca
-      at-spi2-atk
-    ] # Acessibility
-    ++ [
       wine
       winetricks
     ] # Wine and gaming
@@ -510,6 +506,7 @@
     BROWSER = "firefox";
     QT_QPA_PLATFORMTHEME = "qt5ct";
     GTK_THEME = "Adwaita:dark";
+    GTK_A11Y = "atspi";
   };
 
   xdg.mime = {
@@ -526,8 +523,11 @@
   };
 
   services.flatpak.enable = true;
-
   programs.direnv.enable = true;
+
+  # === Accessibility ===
+  services.gnome.at-spi2-core.enable = true;
+  services.orca.enable = true;
 
   # === Containers ===
   hardware.nvidia-container-toolkit.enable = true;
