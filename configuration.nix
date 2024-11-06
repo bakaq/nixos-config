@@ -355,7 +355,7 @@
             capslock = "overload(caps_layer, esc)";
             rightalt = "backspace";
             backspace = "noop";
-            "102nd" = "compose";
+            #"102nd" = "overload(102nd_layer, compose)";
           };
           "caps_layer:C" = {
             tab = "swap(caps_tab_layer)";
@@ -365,6 +365,7 @@
             j = "down";
             k = "up";
             l = "right";
+            c = "compose";
           };
         };
       };
