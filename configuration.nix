@@ -40,7 +40,7 @@
       swi-prolog
       trealla
       clojure
-      julia
+      julia-bin
       (python312.withPackages (
         ps: with ps; [
           numpy
