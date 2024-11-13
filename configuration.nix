@@ -183,6 +183,7 @@
       tigervnc
       wev
       keyd
+      distrobox
     ];
 
   programs.java = {
@@ -486,6 +487,8 @@
     lapack
     vulkan-loader
     mesa
+    SDL2
+    SDL2_image
     config.boot.kernelPackages.nvidia_x11
   ];
 
