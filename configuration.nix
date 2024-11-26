@@ -269,6 +269,7 @@
   boot.loader.systemd-boot.enable = true;
 
   # === Filesystems ===
+  boot.tmp.useTmpfs = true;
   fileSystems = {
     "/nix".options = [ "noatime" ];
     "/swap".options = [ "noatime" ];
