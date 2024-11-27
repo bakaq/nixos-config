@@ -93,7 +93,7 @@
       # CLI
       cowsay
       cmatrix
-      neofetch
+      hyfetch
       xdragon
       tmux
       neovim
@@ -120,6 +120,7 @@
       lsof
       compsize
       mount-zip
+      ghostscript
     ]
     ++ [
       # Emulation
