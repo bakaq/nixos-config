@@ -127,11 +127,9 @@
       desmume
       mgba
       pcsx2
-      (retroarch.override {
-        cores = with libretro; [
+      (retroarch.withCores (lr: with lr; [
           mupen64plus
-        ];
-      })
+      ]))
     ]
     ++ [
       # Graphics and Wayland
@@ -503,7 +501,8 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
-    nerdfonts
+    nerd-fonts.dejavu-sans-mono
+    nerd-fonts.fira-code
     corefonts
     liberation_ttf
     unifont
