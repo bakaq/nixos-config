@@ -9,7 +9,7 @@
     ./hardware-configuration.nix
   ];
 
-  # === Packages and programs === 
+  # === Packages and programs ===
   environment.systemPackages =
     with pkgs;
     let
@@ -40,7 +40,7 @@
       swi-prolog
       trealla
       clojure
-      julia-bin
+      (julia-bin.overrideAttrs { installCheckPhase = ""; })
       (python312.withPackages (
         ps: with ps; [
           numpy
@@ -127,9 +127,11 @@
       desmume
       mgba
       pcsx2
-      (retroarch.withCores (lr: with lr; [
+      (retroarch.withCores (
+        lr: with lr; [
           mupen64plus
-      ]))
+        ]
+      ))
     ]
     ++ [
       # Graphics and Wayland
@@ -192,7 +194,7 @@
   programs.light.enable = true;
   programs.adb.enable = true;
 
-  # === Nix and Nixpkgs settings === 
+  # === Nix and Nixpkgs settings ===
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
     # For gamescope
@@ -228,7 +230,7 @@
   nix.registry = {
     nixpkgs.flake = inputs.nixpkgs;
   };
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}"];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # === Graphics ===
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -325,7 +327,7 @@
   #        key <LSGT> { [ Multi_key ] };
   #        key <BKSP> { [ VoidSymbol ] };
   #        key <CAPS> { [ Escape ] };
-  #        key <RALT> { 
+  #        key <RALT> {
   #            type = "TWO_LEVEL",
   #            symbols = [ BackSpace, BackSpace ]
   #        };
@@ -341,7 +343,7 @@
   #        key <SCLK> { [ Multi_key ] };
   #        key <BKSP> { [ VoidSymbol ] };
   #        key <CAPS> { [ Escape ] };
-  #        key <RALT> { 
+  #        key <RALT> {
   #            type = "TWO_LEVEL",
   #            symbols = [BackSpace, BackSpace]
   #        };
@@ -354,7 +356,7 @@
     enable = true;
     keyboards = {
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(caps_layer, esc)";
