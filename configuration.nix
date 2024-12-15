@@ -264,9 +264,7 @@
 
   # === Boot and kernel ===
   boot.supportedFilesystems = [ "ntfs" ];
-  # https://github.com/NixOS/nixpkgs/issues/357643
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
 
   # === Filesystems ===
