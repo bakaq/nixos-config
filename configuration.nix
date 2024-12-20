@@ -185,6 +185,7 @@
       wev
       keyd
       distrobox
+      dwarf-fortress-packages.dwarf-fortress-full
     ];
 
   programs.java = {
