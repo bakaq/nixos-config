@@ -358,20 +358,12 @@
         ids = [ "*" ];
         settings = {
           main = {
-            capslock = "overload(caps_layer, esc)";
+            # This was getting very annoying
+            #capslock = "overload(caps_layer, esc)";
+            capslock = "esc";
             rightalt = "backspace";
             backspace = "noop";
             #"102nd" = "overload(102nd_layer, compose)";
-          };
-          "caps_layer:C" = {
-            tab = "swap(caps_tab_layer)";
-          };
-          caps_tab_layer = {
-            h = "left";
-            j = "down";
-            k = "up";
-            l = "right";
-            c = "compose";
           };
         };
       };
