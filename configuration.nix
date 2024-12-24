@@ -121,6 +121,8 @@
       compsize
       mount-zip
       ghostscript
+      nvd
+      tree
     ]
     ++ [
       # Emulation
