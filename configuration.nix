@@ -12,8 +12,6 @@
   # === Packages and programs ===
   environment.systemPackages =
     with pkgs;
-    let
-    in
     [
       # Desktop
       polkit_gnome
@@ -108,6 +106,7 @@
       ripgrep
       fd
       git
+      jujutsu
       nushell
       carapace
       fish
@@ -162,8 +161,10 @@
       dig
     ] # Networking
     ++ [
-      wine
+      wineWowPackages.stable
       winetricks
+      prismlauncher
+      dwarf-fortress-packages.dwarf-fortress-full
     ] # Wine and gaming
     ++ [
       man-pages
@@ -177,7 +178,6 @@
     ] # Embedded
     ++ [
       # Misc
-      wineWowPackages.stable
       cachix
       antimicrox
       gparted
@@ -187,7 +187,6 @@
       wev
       keyd
       distrobox
-      dwarf-fortress-packages.dwarf-fortress-full
     ];
 
   programs.java = {
