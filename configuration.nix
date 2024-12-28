@@ -29,6 +29,7 @@
       file-roller
       libsForQt5.dolphin
       signal-desktop
+      zeal
     ]
     ++ [
       # Programming languages
@@ -39,7 +40,7 @@
       trealla
       clojure
       (julia-bin.overrideAttrs { installCheckPhase = ""; })
-      (python312.withPackages (
+      (python313.withPackages (
         ps: with ps; [
           numpy
           matplotlib
@@ -122,6 +123,7 @@
       ghostscript
       nvd
       tree
+      bash-env-json
     ]
     ++ [
       # Emulation
