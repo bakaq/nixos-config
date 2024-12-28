@@ -127,12 +127,14 @@
     ]
     ++ [
       # Emulation
-      desmume
+      # TODO: Report that this is broken
+      #desmume
       mgba
       pcsx2
       (retroarch.withCores (
         lr: with lr; [
-          mupen64plus
+          # TODO: Report that this is broken
+          #mupen64plus
         ]
       ))
     ]
