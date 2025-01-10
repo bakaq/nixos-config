@@ -84,8 +84,7 @@
       carla
       guitarix
       gxplugins-lv2
-      # https://github.com/NixOS/nixpkgs/issues/348871
-      #distrho
+      distrho-ports
       musescore
     ]
     ++ [
@@ -126,15 +125,12 @@
       bash-env-json
     ]
     ++ [
-      # Emulation
-      # TODO: Report that this is broken
-      #desmume
+      desmume
       mgba
       pcsx2
       (retroarch.withCores (
         lr: with lr; [
-          # TODO: Report that this is broken
-          #mupen64plus
+          mupen64plus
         ]
       ))
     ]
