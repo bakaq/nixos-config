@@ -39,6 +39,8 @@
       swi-prolog
       trealla
       clojure
+      gforth
+      squeak
       (julia-bin.overrideAttrs { installCheckPhase = ""; })
       (python313.withPackages (
         ps: with ps; [
@@ -123,6 +125,8 @@
       nvd
       tree
       bash-env-json
+      wl-clipboard
+      ventoy
     ]
     ++ [
       desmume
@@ -164,6 +168,7 @@
       wineWowPackages.stable
       winetricks
       prismlauncher
+      protontricks
       dwarf-fortress-packages.dwarf-fortress-full
     ] # Wine and gaming
     ++ [
@@ -487,7 +492,8 @@
     mesa
     SDL2
     SDL2_image
-    config.boot.kernelPackages.nvidia_x11
+    #config.boot.kernelPackages.nvidia_x11
+    config.hardware.nvidia.package
   ];
 
   # === Fonts ===
