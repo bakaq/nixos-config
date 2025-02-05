@@ -57,6 +57,9 @@
           hypothesis
         ]
       ))
+      wasm-pack
+      wasm-tools
+      wasmtime
     ]
     ++ [
       # Programming tools, linters and LSPs
@@ -127,6 +130,7 @@
       bash-env-json
       wl-clipboard
       ventoy
+      config.boot.kernelPackages.perf
     ]
     ++ [
       desmume
