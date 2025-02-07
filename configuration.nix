@@ -282,7 +282,6 @@
   boot.tmp.useTmpfs = true;
   fileSystems = {
     "/nix".options = [ "noatime" ];
-    "/swap".options = [ "noatime" ];
   };
 
   # === Networking ===
@@ -593,12 +592,6 @@
 
   # === Swap ===
   zramSwap.enable = true;
-  swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = 8 * 1024; # 8GiB
-    }
-  ];
 
   system.stateVersion = "23.11";
 }
