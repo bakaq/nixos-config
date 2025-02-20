@@ -34,7 +34,9 @@
     ++ [
       # Programming languages
       gcc
+      clang
       rustup
+      zig
       go
       swi-prolog
       trealla
@@ -59,7 +61,9 @@
       ))
       wasm-pack
       wasm-tools
+      binaryen
       wasmtime
+      typst
     ]
     ++ [
       # Programming tools, linters and LSPs
@@ -67,6 +71,7 @@
       gradle
       gnumake
       clang-tools
+      zls
       gdb
       nixd
       nixfmt-rfc-style
