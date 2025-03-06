@@ -62,6 +62,7 @@
       wasm-pack
       wasm-tools
       binaryen
+      valgrind
       wasmtime
       typst
     ]
