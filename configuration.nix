@@ -158,7 +158,6 @@
       # Formal methods
       tlaplusToolbox
       coq
-      coqPackages.coqide
       nusmv
     ]
     ++ [
