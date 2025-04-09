@@ -377,7 +377,8 @@
             #capslock = "overload(caps_layer, esc)";
             capslock = "esc";
             rightalt = "backspace";
-            backspace = "noop";
+            backspace = "compose";
+            #backspace = "noop";
             #"102nd" = "overload(102nd_layer, compose)";
           };
         };
