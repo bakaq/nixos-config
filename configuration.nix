@@ -70,6 +70,9 @@
       # Programming tools, linters and LSPs
       pixi
       gradle
+      leiningen
+      libllvm
+      tree-sitter
       gnumake
       clang-tools
       zls
@@ -80,6 +83,7 @@
       gopls
       jdt-language-server
       clojure-lsp
+      tinymist
       nodePackages.bash-language-server
       nodePackages.typescript-language-server
       pyright
@@ -139,7 +143,7 @@
       config.boot.kernelPackages.perf
     ]
     ++ [
-      godot
+      #godot
       desmume
       mgba
       pcsx2
