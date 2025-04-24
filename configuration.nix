@@ -143,7 +143,7 @@
       config.boot.kernelPackages.perf
     ]
     ++ [
-      #godot
+      godot
       desmume
       mgba
       pcsx2
