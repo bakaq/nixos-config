@@ -43,6 +43,7 @@
       clojure
       gforth
       squeak
+      guile
       (julia-bin.overrideAttrs { installCheckPhase = ""; })
       (python313.withPackages (
         ps: with ps; [
@@ -141,6 +142,7 @@
       wl-clipboard
       ventoy
       config.boot.kernelPackages.perf
+      rlwrap
     ]
     ++ [
       godot
@@ -162,6 +164,7 @@
     ++ [
       # Formal methods
       tlaplusToolbox
+      tlaplus18
       coq
       nusmv
     ]
@@ -184,6 +187,7 @@
       prismlauncher
       protontricks
       dwarf-fortress-packages.dwarf-fortress-full
+      openmw
     ] # Wine and gaming
     ++ [
       man-pages
@@ -206,6 +210,7 @@
       wev
       keyd
       distrobox
+      graphviz
     ];
 
   programs.java = {
