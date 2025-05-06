@@ -29,7 +29,6 @@
       file-roller
       libsForQt5.dolphin
       signal-desktop
-      zeal
     ]
     ++ [
       # Programming languages
@@ -134,7 +133,6 @@
       pciutils
       lsof
       compsize
-      mount-zip
       ghostscript
       nvd
       tree
@@ -149,11 +147,7 @@
       desmume
       mgba
       pcsx2
-      (retroarch.withCores (
-        lr: with lr; [
-          mupen64plus
-        ]
-      ))
+      mupen64plus
     ]
     ++ [
       # Graphics and Wayland
@@ -177,36 +171,38 @@
       libsForQt5.qt5ct
     ]
     ++ [
+      # Networking
       netcat-openbsd
       nmap
       dig
-    ] # Networking
+    ]
     ++ [
+      # Wine and gaming
       wineWowPackages.stable
       winetricks
       prismlauncher
       protontricks
-      dwarf-fortress-packages.dwarf-fortress-full
+      dfhack
       openmw
-    ] # Wine and gaming
+    ]
     ++ [
+      # Documentation
       man-pages
       man-pages-posix
       tldr
-    ] # Documentation
+    ]
     ++ [
+      # Embedded
       tio
       arduino-ide
       hexedit
-    ] # Embedded
+    ]
     ++ [
       # Misc
       cachix
       antimicrox
       gparted
       datefudge
-      texliveFull
-      tigervnc
       wev
       keyd
       distrobox
@@ -339,41 +335,6 @@
       fcitx5-gtk
     ];
   };
-  #services.xserver.xkb.extraLayouts = {
-  #  dvpk = {
-  #    description = "Customized Programmer's Dvorak";
-  #    languages = [ "eng" ];
-  #    symbolsFile = builtins.toFile "dvpk" ''
-  #      xkb_symbols "dvpk" {
-  #        include "us(dvp)"
-  #        key <SCLK> { [ Multi_key ] };
-  #        key <LSGT> { [ Multi_key ] };
-  #        key <BKSP> { [ VoidSymbol ] };
-  #        key <CAPS> { [ Escape ] };
-  #        key <RALT> {
-  #            type = "TWO_LEVEL",
-  #            symbols = [ BackSpace, BackSpace ]
-  #        };
-  #      };
-  #    '';
-  #  };
-  #  br-abnt2k = {
-  #    description = "Customized br-abnt2";
-  #    languages = [ "por" ];
-  #    symbolsFile = builtins.toFile "abnt2k" ''
-  #      xkb_symbols "abnt2k" {
-  #        include "br(abnt2)"
-  #        key <SCLK> { [ Multi_key ] };
-  #        key <BKSP> { [ VoidSymbol ] };
-  #        key <CAPS> { [ Escape ] };
-  #        key <RALT> {
-  #            type = "TWO_LEVEL",
-  #            symbols = [BackSpace, BackSpace]
-  #        };
-  #      };
-  #    '';
-  #  };
-  #};
 
   services.keyd = {
     enable = true;
