@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./cachix.nix
   ];
 
   # === Packages and programs ===
@@ -138,7 +139,6 @@
       tree
       bash-env-json
       wl-clipboard
-      ventoy
       config.boot.kernelPackages.perf
       rlwrap
     ]
