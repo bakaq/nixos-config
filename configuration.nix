@@ -33,6 +33,7 @@
     ]
     ++ [
       # Programming languages
+      erlang
       gcc
       clang
       rustup
@@ -66,6 +67,7 @@
       valgrind
       wasmtime
       typst
+      sqlite
     ]
     ++ [
       # Programming tools, linters and LSPs
@@ -118,9 +120,11 @@
       duf
       du-dust
       lshw
+      usbutils
       fzf
       ripgrep
       fd
+      bat
       git
       jujutsu
       nushell
@@ -130,6 +134,7 @@
       unrar-wrapper
       libsixel
       file
+      tokei
       btrfs-progs
       pciutils
       lsof
