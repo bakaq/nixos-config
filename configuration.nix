@@ -86,6 +86,7 @@
       gopls
       jdt-language-server
       clojure-lsp
+      cljfmt
       tinymist
       nodePackages.bash-language-server
       nodePackages.typescript-language-server
@@ -112,7 +113,9 @@
       hyfetch
       xdragon
       tmux
+      zellij
       neovim
+      helix
       newsboat
       jq
       unzip
@@ -528,7 +531,7 @@
   # === Environment ===
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
-    VISUAL = "nvim";
+    VISUAL = "hx";
     EDITOR = VISUAL;
     BROWSER = "firefox";
     QT_QPA_PLATFORMTHEME = "qt5ct";
