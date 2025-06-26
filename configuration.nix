@@ -100,7 +100,7 @@
       yabridge
       yabridgectl
       reaper
-      carla
+      #carla
       guitarix
       gxplugins-lv2
       distrho-ports
