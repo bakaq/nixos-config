@@ -571,6 +571,9 @@
     };
   };
 
+  # === Tailscale ===
+  services.tailscale.enable = true;
+
   # === Virtualization ===
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
