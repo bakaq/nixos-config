@@ -92,6 +92,7 @@
       nodePackages.typescript-language-server
       pyright
       black
+      meld
     ]
     ++ [
       # Audio and music
@@ -105,6 +106,7 @@
       gxplugins-lv2
       distrho-ports
       musescore
+      obs-studio
     ]
     ++ [
       # CLI
@@ -119,6 +121,7 @@
       newsboat
       jq
       unzip
+      atool
       btop
       duf
       du-dust
@@ -149,6 +152,7 @@
       wl-clipboard
       config.boot.kernelPackages.perf
       rlwrap
+      tailscale
     ]
     ++ [
       godot
