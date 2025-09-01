@@ -28,7 +28,7 @@
       imagemagick
       krita
       file-roller
-      libsForQt5.dolphin
+      kdePackages.dolphin
       signal-desktop
     ]
     ++ [
@@ -319,6 +319,7 @@
     allowedTCPPorts = [
       8000
       5000
+      5900
       3000
     ];
   };
