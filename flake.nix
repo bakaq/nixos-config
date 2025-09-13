@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-df.url = "github:NixOS/nixpkgs/b599843bad24621dcaa5ab60dac98f9b0eb1cabe";
     #nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     musnix = {

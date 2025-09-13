@@ -194,7 +194,7 @@
       winetricks
       prismlauncher
       protontricks
-      dfhack
+      (import inputs.nixpkgs-df { system = "x86_64-linux"; config.allowUnfree = true; }).dfhack
       openmw
     ]
     ++ [
