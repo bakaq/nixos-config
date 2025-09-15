@@ -150,7 +150,7 @@
       tree
       bash-env-json
       wl-clipboard
-      config.boot.kernelPackages.perf
+      perf
       rlwrap
       tailscale
     ]
