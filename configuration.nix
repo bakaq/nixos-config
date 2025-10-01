@@ -93,6 +93,7 @@
       pyright
       black
       meld
+      vscode
     ]
     ++ [
       # Audio and music
@@ -219,6 +220,9 @@
       keyd
       distrobox
       graphviz
+      hledger
+      hledger-ui
+      hledger-web
     ];
 
   programs.java = {
