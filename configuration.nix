@@ -25,6 +25,7 @@
       zathura
       thunderbird
       feh
+      imv
       imagemagick
       krita
       file-roller
@@ -154,6 +155,9 @@
       perf
       rlwrap
       tailscale
+      delta
+      broot
+      zoxide
     ]
     ++ [
       godot
