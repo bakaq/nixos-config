@@ -115,7 +115,7 @@
       cowsay
       cmatrix
       hyfetch
-      xdragon
+      dragon-drop
       tmux
       zellij
       neovim
@@ -126,7 +126,7 @@
       atool
       btop
       duf
-      du-dust
+      dust
       lshw
       usbutils
       fzf
@@ -170,7 +170,7 @@
       # Graphics and Wayland
       qt5.qtwayland
       vulkan-tools
-      glxinfo
+      mesa-demos
     ]
     ++ [
       # Formal methods
@@ -502,7 +502,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     nerd-fonts.dejavu-sans-mono
     nerd-fonts.fira-code
     corefonts
