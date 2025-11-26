@@ -42,10 +42,12 @@
       go
       swi-prolog
       trealla
+      gprolog
       clojure
       gforth
       squeak
       guile
+      jdk25
       (julia-bin.overrideAttrs { installCheckPhase = ""; })
       (python313.withPackages (
         ps: with ps; [
@@ -72,6 +74,7 @@
     ]
     ++ [
       # Programming tools, linters and LSPs
+      ghostty
       pixi
       gradle
       leiningen
@@ -89,12 +92,14 @@
       clojure-lsp
       cljfmt
       tinymist
+      typstyle
       nodePackages.bash-language-server
       nodePackages.typescript-language-server
       pyright
       black
       meld
       vscode
+      nufmt
     ]
     ++ [
       # Audio and music
@@ -158,6 +163,7 @@
       delta
       broot
       zoxide
+      watchexec
     ]
     ++ [
       godot
@@ -171,6 +177,7 @@
       qt5.qtwayland
       vulkan-tools
       mesa-demos
+      wayvnc
     ]
     ++ [
       # Formal methods
@@ -227,6 +234,7 @@
       hledger
       hledger-ui
       hledger-web
+      vial
     ];
 
   programs.java = {
