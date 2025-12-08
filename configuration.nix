@@ -164,6 +164,9 @@
       broot
       zoxide
       watchexec
+      ffmpeg
+      hyperfine
+
     ]
     ++ [
       godot
@@ -235,6 +238,7 @@
       hledger-ui
       hledger-web
       vial
+      hotspot
     ];
 
   programs.java = {
