@@ -38,13 +38,15 @@
       gcc
       clang
       rustup
+      elan
+      maven
       zig
       go
       swi-prolog
       trealla
-      gprolog
+      #gprolog
       clojure
-      gforth
+      #gforth
       squeak
       guile
       jdk25
@@ -105,8 +107,8 @@
       # Audio and music
       pavucontrol
       qpwgraph
-      yabridge
-      yabridgectl
+      #yabridge
+      #yabridgectl
       reaper
       #carla
       guitarix
@@ -166,7 +168,8 @@
       watchexec
       ffmpeg
       hyperfine
-
+      sqlx-cli
+      zip
     ]
     ++ [
       godot
@@ -199,7 +202,7 @@
     ]
     ++ [
       # Networking
-      netcat-openbsd
+      #netcat-openbsd
       nmap
       dig
     ]
@@ -209,7 +212,10 @@
       winetricks
       prismlauncher
       protontricks
-      (import inputs.nixpkgs-df { system = "x86_64-linux"; config.allowUnfree = true; }).dfhack
+      (import inputs.nixpkgs-df {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      }).dfhack
       openmw
     ]
     ++ [
