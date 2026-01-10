@@ -293,7 +293,16 @@
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # === Graphics ===
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    enable = true;
+    desktopManager = {
+      xfce.enable = true;
+    };
+    displayManager = {
+      startx.enable = true;
+    };
+    videoDrivers = [ "nvidia" ];
+  };
   hardware.nvidia = {
     modesetting.enable = true;
     #powerManagement.enable = true;
@@ -314,6 +323,9 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+    ];
   };
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
@@ -582,6 +594,23 @@
   programs.appimage = {
     enable = true;
     binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs =
+        pkgs: with pkgs; [
+          pipewire
+          pulseaudio
+          alsa-lib
+          libglvnd
+          vulkan-loader
+          wayland
+          mesa
+          libva
+          libGL
+          libgbm
+          xdg-desktop-portal-gnome
+          config.hardware.nvidia.package
+        ];
+    };
   };
 
   services.flatpak.enable = true;
