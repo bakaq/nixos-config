@@ -51,7 +51,7 @@
       guile
       jdk25
       (julia-bin.overrideAttrs { installCheckPhase = ""; })
-      (python313.withPackages (
+      (python3.withPackages (
         ps: with ps; [
           numpy
           matplotlib
@@ -87,7 +87,7 @@
       zls
       gdb
       nixd
-      nixfmt-rfc-style
+      nixfmt
       lua-language-server
       gopls
       jdt-language-server
@@ -107,10 +107,10 @@
       # Audio and music
       pavucontrol
       qpwgraph
-      #yabridge
-      #yabridgectl
+      yabridge
+      yabridgectl
       reaper
-      #carla
+      carla
       guitarix
       gxplugins-lv2
       distrho-ports
@@ -252,7 +252,6 @@
     binfmt = true;
   };
   programs.light.enable = true;
-  programs.adb.enable = true;
 
   # === Nix and Nixpkgs settings ===
   nixpkgs.config.allowUnfree = true;
