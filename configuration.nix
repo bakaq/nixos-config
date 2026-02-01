@@ -217,6 +217,7 @@
         config.allowUnfree = true;
       }).dfhack
       openmw
+      xrizer
     ]
     ++ [
       # Documentation
@@ -293,13 +294,13 @@
 
   # === Graphics ===
   services.xserver = {
-    enable = true;
-    desktopManager = {
-      xfce.enable = true;
-    };
-    displayManager = {
-      startx.enable = true;
-    };
+    #enable = true;
+    #desktopManager = {
+    #  xfce.enable = true;
+    #};
+    #displayManager = {
+    #  startx.enable = true;
+    #};
     videoDrivers = [ "nvidia" ];
   };
   hardware.nvidia = {
@@ -311,10 +312,11 @@
     forceFullCompositionPipeline = true;
     #package = config.boot.kernelPackages.nvidiaPackages.latest;
     prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+      # It seems this isn't actually supported on my GPU
+      #offload = {
+      #  enable = true;
+      #  enableOffloadCmd = true;
+      #};
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
@@ -539,6 +541,7 @@
     unifont
     unifont_upper
     wqy_zenhei
+    linja-sike
   ];
   fonts.fontDir.enable = true;
 
@@ -570,6 +573,14 @@
   # === Gaming ===
   programs.steam.enable = true;
   programs.gamescope.enable = true;
+
+  services.wivrn = {
+    enable = true;
+    openFirewall = true;
+    defaultRuntime = true;
+    autoStart = true;
+    package = (pkgs.wivrn.override { cudaSupport = true; });
+  };
 
   # === Environment ===
   environment.localBinInPath = true;
