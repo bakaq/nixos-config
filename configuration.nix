@@ -111,7 +111,7 @@
       yabridgectl
       reaper
       carla
-      guitarix
+      #guitarix
       gxplugins-lv2
       distrho-ports
       musescore
@@ -208,7 +208,7 @@
     ]
     ++ [
       # Wine and gaming
-      wineWowPackages.stable
+      wineWow64Packages.stable
       winetricks
       prismlauncher
       protontricks
@@ -262,10 +262,10 @@
     steam = pkgs.steam.override {
       extraPkgs =
         pkgs: with pkgs; [
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
+          libXcursor
+          libXi
+          libXinerama
+          libXScrnSaver
           libpng
           libpulseaudio
           libvorbis
@@ -462,7 +462,7 @@
   documentation.dev.enable = true;
   documentation.man = {
     enable = true;
-    generateCaches = true;
+    cache.enable = true;
   };
 
   # === Dynamic linking and nix-ld ===
@@ -505,20 +505,20 @@
     nspr
     nss
     icu
-    xorg.libX11
-    xorg.libXScrnSaver
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXtst
-    xorg.libxcb
-    xorg.libxkbfile
-    xorg.libxshmfence
+    libX11
+    libXScrnSaver
+    libXcomposite
+    libXcursor
+    libXdamage
+    libXext
+    libXfixes
+    libXi
+    libXrandr
+    libXrender
+    libXtst
+    libxcb
+    libxkbfile
+    libxshmfence
     blas
     lapack
     vulkan-loader
